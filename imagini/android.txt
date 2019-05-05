@@ -1,0 +1,90 @@
+package com.example.myapplication;
+
+import android.content.Intent;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.support.v7.AppCompactActivity
+import android.nfc.NfcAdapter;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ImageView;
+
+import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class main_activity extends AppCompactActvity {
+
+    Button btnTakePic;
+    ImageView imageView;
+
+    @Override
+    protected void  on Create(@Nullable Bundle savedInstanceState){
+    super.on Create( savedInstanceState);
+    setConectView(R.layout.main_activity);
+            btnTakePic = findViewById(R.id.binTahePic);
+            btnTakePic.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public
+                public void onClick(View v) {
+                    dispactPictureTakeAction();
+
+                }
+            });
+            imageView = findViewById(R.id.image);
+
+
+@Override
+        protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        }
+
+
+
+
+    }
+
+    private void dispactPictureTakeAction() {
+        Intent takePic= new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if(takePic.resolveActivity(getPackageManager())!=null);
+        {
+            File photoFile = null;
+
+                photoFile = createPhotoFile();
+            if(photoFile) {
+
+                String pathToFile = photoFile.getAbsolutePath();
+            Uri photoURI = FileProvider.getUriForFile(main_activity.this, "fssds", photoFile);
+            takePic.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+            startActivityFotResults(takePic, 1)
+            }
+
+        }
+
+
+    }
+
+    private File createPhotoFile() {
+
+
+
+        String name = new SimpleDateFormat(pattern:"yyyyMMdd_HHmmmss").format(new Date());
+        File storageDir = getExternalStoregePublicDirectory(Environment.DIRECTORY_PICTURES);
+        File image = null;
+        try {
+            image = File.createTempFile(name, "jpg", storageDir);
+        } catch (IOException e) {
+            Log.d("my log","Except :" + e.toString())
+        }
+return image;
+
+    }
+
+
+}

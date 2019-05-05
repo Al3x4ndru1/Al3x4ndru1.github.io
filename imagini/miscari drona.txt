@@ -1,0 +1,16 @@
+<<html>
+<body>
+
+<h2>Batery</h2>
+
+    <p>
+
+<button type="button"
+onclick="document.getElementById('demo').innerHTML = batery%()" style="height: 208px; width: 330px; margin-left: 966px; margin-top: 358px">
+
+        </button>
+
+    </p>
+
+</body>
+</html> 
